@@ -1,4 +1,4 @@
-package com.example.lab2
+package com.example.lab2.view.screens
 
 import android.view.animation.OvershootInterpolator
 import androidx.compose.animation.core.Animatable
@@ -16,10 +16,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import com.example.lab2.R
+import com.example.lab2.view.navigation.Route
 import kotlinx.coroutines.delay
 
 @Composable
-fun SplashScreenAnimate() {
+fun SplashScreenAnimate(navController: NavController) {
 
     val scale = remember {
         Animatable(0f)
@@ -35,8 +38,8 @@ fun SplashScreenAnimate() {
                 }
             )
         )
-
         delay(2000L)
+        navController.navigate(Route.MainScreen.route)
     }
 
     Column(

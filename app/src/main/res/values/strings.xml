@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Lab2</string>
+
+    //Screen
+    <string name="main_screen">MainScreen</string>
+    <string name="splash_screen">SplashScreen</string>
+    <string name="sign_in_screen">SignInScreen</string>
+    <string name="sign_up_screen">SignUpScreen</string>
 </resources>
