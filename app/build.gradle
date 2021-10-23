@@ -62,4 +62,9 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
+
+    //Compose Runtime from: https://developer.android.com/jetpack/androidx/releases/compose-runtime
+    implementation("androidx.compose.runtime:runtime:1.1.0-alpha06")
+    implementation("androidx.compose.runtime:runtime-livedata:1.1.0-alpha06")
+    implementation("androidx.compose.runtime:runtime-rxjava2:1.1.0-alpha06")
 }
