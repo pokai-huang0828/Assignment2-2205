@@ -44,9 +44,17 @@ fun SplashScreenAnimate(navController: NavController) {
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
+
         verticalArrangement = Arrangement.Center,
         modifier = Modifier.fillMaxSize()
     ) {
+        Image(
+            painter = painterResource(id = R.drawable.lab2logotext),
+            contentDescription = "Splash Image",
+            modifier = Modifier
+                .size(300.dp)
+                .scale(scale.value)
+        )
         Image(
             painter = painterResource(id = R.drawable.lab2logotext),
             contentDescription = "Splash Image",

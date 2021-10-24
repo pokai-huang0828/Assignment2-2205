@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
 }
 
@@ -91,8 +92,32 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.4.0-alpha10")
 
     // Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.1.1'
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.5.0")
 
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.5'
+    // GOOGLE:
+    implementation 'com.google.firebase:firebase-auth:21.0.1'
+    // Also declare the dependency for the Google Play services library and specify its version
+    implementation 'com.google.android.gms:play-services-auth:19.2.0'
+    implementation 'com.firebaseui:firebase-ui-auth:4.3.2'
+    implementation("androidx.compose.ui:ui:1.1.0-alpha05")
+    implementation("androidx.compose.ui:ui-tooling:1.1.0-alpha05")
+    implementation("androidx.compose.foundation:foundation:1.1.0-alpha05")
+    implementation("androidx.compose.material:material:1.1.0-alpha05")
+
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0-rc01")
+
+    // For Interoperability
+    implementation("androidx.activity:activity-compose:1.4.0-beta01")
+    implementation(platform("com.google.firebase:firebase-bom:28.2.0"))
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.android.gms:play-services-auth:19.2.0")
+
+    // Accompanist for Permissions
+    implementation "com.google.accompanist:accompanist-permissions:0.18.0"
+
+    // Coil for Loading Image
+    implementation("io.coil-kt:coil-compose:1.4.0")
 }

@@ -1,6 +1,7 @@
 package com.example.lab2.view.screens
 
 import android.view.MotionEvent
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -31,13 +32,17 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.lab2.MainActivity
 import com.example.lab2.R
+import com.example.lab2.auth.Auth
 import com.example.lab2.view.navigation.Route
 
 
+@ExperimentalAnimationApi
 @ExperimentalComposeUiApi
 @Composable
-fun SignInScreen(navController: NavController
+fun SignInScreen(navController: NavController,
+                 auth: Auth
 ) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -91,36 +96,43 @@ fun SignInScreen(navController: NavController
                 )
             },
             trailingIcon = {
-                val image = if (passwordVisibility)
-                    Icons.Filled.Close
-                else Icons.Filled.Face
-
                 IconButton(onClick = {
                     passwordVisibility = !passwordVisibility
                 }) {
-                    Icon(imageVector = image, "")
+                    if (passwordVisibility)
+                        Icon(
+                            painter = painterResource(id = R.drawable.baseline_visibility_off_black_24dp),
+                            contentDescription = "",
+                            modifier = Modifier.size(25.dp)
+                        )
+                    else Icon(painter = painterResource(id = R.drawable.baseline_visibility_black_24dp),
+                        contentDescription = "",
+                        modifier = Modifier.size(25.dp)
+                    )
                 }
             },
         )
 
         val selected = remember { mutableStateOf(false) }
-        val scale = animateFloatAsState(if (selected.value) 0.8f else 1f)
+        val scale = animateFloatAsState(if (selected.value) 0.95f else 1f)
         Button(
             onClick = {  },
 
             modifier = Modifier
                 .scale(scale.value)
                 .padding(top = 15.dp)
-                .fillMaxWidth(0.8f)
+                .fillMaxWidth(0.75f)
                 .height(50.dp)
-                .shadow(elevation = 10.dp, shape = RoundedCornerShape(20.dp), clip = true)
+                .shadow(elevation = 10.dp, shape = RoundedCornerShape(25.dp), clip = true)
                 .pointerInteropFilter {
-                                      when(it.action){
-                                          MotionEvent.ACTION_DOWN -> {
-                                              selected.value = true }
-                                          MotionEvent.ACTION_UP -> {
-                                              selected.value = false }
-                                      }
+                    when (it.action) {
+                        MotionEvent.ACTION_DOWN -> {
+                            selected.value = true
+                        }
+                        MotionEvent.ACTION_UP -> {
+                            selected.value = false
+                        }
+                    }
                     true
                 },
 
@@ -133,6 +145,40 @@ fun SignInScreen(navController: NavController
             )
         }
 
+        OutlinedButton(
+            border = ButtonDefaults.outlinedBorder.copy(width = 1.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 55.dp)
+                .padding(top = 10.dp)
+                .height(50.dp),
+            onClick = { auth.signInWithGoogle(MainActivity.GOOGLE_AUTH) }
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+                content = {
+                    Icon(
+                        tint = Color.Unspecified,
+                        painter = painterResource(id = R.drawable.googleg_standard_color_18),
+                        contentDescription = null,
+                    )
+                    Text(
+                        color = Color.Black,
+                        text = "Login with Google",
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.W900,
+                    )
+                    Icon(
+                        tint = Color.Transparent,
+                        imageVector = Icons.Default.MailOutline,
+                        contentDescription = null,
+                    )
+                }
+            )
+        }
+
         Spacer(modifier = Modifier.padding(top = 25.dp))
 
         Text(
@@ -141,7 +187,7 @@ fun SignInScreen(navController: NavController
                 append("Don't have an account? Sign up here!")
                 addStyle(
                     style = SpanStyle(
-
+                        color = Color.Blue,
                         fontWeight = FontWeight.Bold,
                         fontSize = 16.sp,
                         textDecoration = TextDecoration.Underline
@@ -163,7 +209,7 @@ fun LogoTextBox() {
         modifier = Modifier
             .height(270.dp)
             .fillMaxWidth()
-            .background(Color.Gray),
+            ,
     ) {
         Image(
             painter = painterResource(id = R.drawable.lab2logotext),
