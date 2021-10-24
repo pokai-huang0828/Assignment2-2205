@@ -5,6 +5,7 @@ import com.example.lab2.model.entities.User
 import com.example.lab2.model.responses.Resource
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
@@ -14,6 +15,7 @@ class UserRepository {
     private val _collection = FirebaseFirestore.getInstance().collection("users")
     private val TAG = "Debug"
 
+    @ExperimentalCoroutinesApi
     fun getUsers() = callbackFlow {
         val snapshotListener = _collection.addSnapshotListener { snapshot, error ->
             val response = if (error == null) {

@@ -9,17 +9,12 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import com.example.lab2.auth.Auth
 import com.example.lab2.ui.theme.Lab2Theme
 import com.example.lab2.view.navigation.Navigation
-import com.google.firebase.auth.FirebaseAuth
-
-
-
 
 
 @ExperimentalComposeUiApi
 @ExperimentalAnimationApi
 class MainActivity : ComponentActivity() {
     private lateinit var auth: Auth
-    private val mAuth: FirebaseAuth? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

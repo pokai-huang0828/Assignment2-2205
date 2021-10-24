@@ -20,25 +20,17 @@ import com.example.lab2.view.screens.SplashScreenAnimate
 @Composable
 fun Navigation(auth: Auth) {
     val navController = rememberNavController()
-    val startDestination by remember {
-        mutableStateOf(
-            when (auth.currentUser) {
-                null -> Route.SplashScreen.route
-                else -> Route.MainScreen.route
-            }
-        )
-    }
 
     NavHost(
         navController = navController,
-        startDestination = startDestination
+        startDestination = Route.SplashScreen.route
     ){
         composable(Route.SplashScreen.route){
-            SplashScreenAnimate(navController = navController)
+            SplashScreenAnimate(navController = navController, auth = auth)
         }
 
         composable(Route.MainScreen.route){
-            MainScreen(navController = navController)
+            MainScreen(navController = navController, auth = auth)
         }
 
         composable(Route.SignInScreen.route){

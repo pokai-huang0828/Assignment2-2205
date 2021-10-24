@@ -1,18 +1,17 @@
 package com.example.lab2.view.screens
 
 import android.view.MotionEvent
-import android.widget.Toast
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Email
-import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -31,7 +30,6 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -84,6 +82,7 @@ fun SignUpScreen(
                     tint = Color.Black,
                 )
             },
+            singleLine = true,
 //            colors = TextFieldDefaults.outlinedTextFieldColors(
 //                focusedBorderColor = ThirdColor,
 //                focusedLabelColor = SecondaryColor,
@@ -122,6 +121,7 @@ fun SignUpScreen(
                     )
                 }
             },
+            singleLine = true,
 //            colors = TextFieldDefaults.outlinedTextFieldColors(
 //                focusedBorderColor = ThirdColor,
 //                focusedLabelColor = SecondaryColor,
@@ -159,40 +159,42 @@ fun SignUpScreen(
                     )
                 }
             },
-
+            singleLine = true
 //            colors = TextFieldDefaults.outlinedTextFieldColors(
 //                focusedBorderColor = ThirdColor,
 //                focusedLabelColor = SecondaryColor,
 //                unfocusedBorderColor = SecondaryColor
 //            ),
         )
+
         Text(
             text = if( password != confirmPassword )"Your password is not match, please check again" else "",
             color = Color.Red
         )
 
-        val selected = remember { mutableStateOf(false) }
-        val scale = animateFloatAsState(if (selected.value) 0.95f else 1f)
+//        val selected = remember { mutableStateOf(false) }
+//        val scale = animateFloatAsState(if (selected.value) 0.95f else 1f)
         Button(
             onClick = { auth.signUpWithEmailAndPassword(navController, email, password) },
 
             modifier = Modifier
-                .scale(scale.value)
+//                .scale(scale.value)
                 .padding(top = 15.dp)
                 .fillMaxWidth(0.75f)
                 .shadow(elevation = 10.dp, shape = RoundedCornerShape(25.dp), clip = true)
                 .height(50.dp)
-                .pointerInteropFilter {
-                    when (it.action) {
-                        MotionEvent.ACTION_DOWN -> {
-                            selected.value = true
-                        }
-                        MotionEvent.ACTION_UP -> {
-                            selected.value = false
-                        }
-                    }
-                    true
-                }
+//                .pointerInteropFilter {
+//
+//                    when (it.action) {
+//                        MotionEvent.ACTION_DOWN -> {
+//                            selected.value = true
+//                        }
+//                        MotionEvent.ACTION_UP -> {
+//                            selected.value = false
+//                        }
+//                    }
+//                    true
+//                }
         ) {
             Text(
 

@@ -10,6 +10,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -17,20 +18,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.lab2.auth.Auth
 
 @ExperimentalAnimationApi
 @Composable
-fun MainScreen(navController: NavController) {
+fun MainScreen(navController: NavController, auth: Auth) {
     Scaffold(
         modifier = Modifier
             .background(color = Color.Gray)
             .fillMaxSize(),
-        topBar = { TopBar(navController) }
+        topBar = { TopBar(navController, auth = auth) }
     ) {
 
     }
@@ -38,7 +41,7 @@ fun MainScreen(navController: NavController) {
 
 @ExperimentalAnimationApi
 @Composable
-fun TopBar(navController: NavController) {
+fun TopBar(navController: NavController, auth: Auth) {
     var visible by remember { mutableStateOf(false) }
     Column(Modifier.shadow(elevation = 5.dp)) {
         Row(
@@ -52,7 +55,7 @@ fun TopBar(navController: NavController) {
         ) {
             Text(
                 text = "Mock page",
-                color = Color.White,
+                color = White,
                 fontSize = 30.sp,
                 modifier = Modifier
                     .padding(5.dp)
@@ -79,9 +82,25 @@ fun TopBar(navController: NavController) {
                     Icon(
                         imageVector = Icons.Filled.Search,
                         contentDescription = "Search",
-                        tint = Color.White,
+                        tint = White,
                         modifier = Modifier
                             .size(30.dp)
+                    )
+                }
+
+                IconButton(
+                    onClick = { auth.signOut(navController) },
+                    modifier = Modifier
+                        .padding(5.dp)
+                        .size(45.dp)
+                        .clip(CircleShape)
+                ) {
+                    Icon(
+                        imageVector = Icons.Filled.ExitToApp,
+                        contentDescription = "Logout",
+                        tint = White,
+                        modifier = Modifier
+                            .size(28.dp)
                     )
                 }
             }
@@ -120,7 +139,7 @@ fun SearchBar() {
                     Icon(
                         imageVector = Icons.Default.Search,
                         contentDescription = "Search",
-                        tint = Color.White,
+                        tint = White,
                         modifier = Modifier.size(30.dp)
                     )
                 },

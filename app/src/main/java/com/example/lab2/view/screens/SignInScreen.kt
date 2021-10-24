@@ -116,7 +116,7 @@ fun SignInScreen(navController: NavController,
         val selected = remember { mutableStateOf(false) }
         val scale = animateFloatAsState(if (selected.value) 0.95f else 1f)
         Button(
-            onClick = {  },
+            onClick = { auth.signInWithEmailAndPassword(navController, email, password) },
 
             modifier = Modifier
                 .scale(scale.value)

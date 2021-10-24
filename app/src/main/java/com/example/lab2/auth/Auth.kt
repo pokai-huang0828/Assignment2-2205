@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.widget.Toast
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.navigation.NavController
 import com.example.lab2.model.entities.User
 import com.example.lab2.model.repositories.UserRepository
@@ -19,7 +19,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 
 class Auth (var context: Activity, default_web_client_id: String) {
@@ -44,7 +44,7 @@ class Auth (var context: Activity, default_web_client_id: String) {
 
     fun signInWithGoogle(requestCode: Int) {
         val signInIntent = googleSignInClient.signInIntent
-        ActivityCompat.startActivityForResult(context, signInIntent, requestCode, null)
+        startActivityForResult(context, signInIntent, requestCode, null)
     }
 
     @ExperimentalAnimationApi
@@ -78,7 +78,7 @@ class Auth (var context: Activity, default_web_client_id: String) {
                     currentUser = _auth.currentUser
 
                     // Try to get user from fire store
-                    CoroutineScope(Dispatchers.IO).launch {
+                    CoroutineScope(IO).launch {
                         val response = userRepo.getUserById(_auth.currentUser?.uid!!)
 
                         // if no user, create one

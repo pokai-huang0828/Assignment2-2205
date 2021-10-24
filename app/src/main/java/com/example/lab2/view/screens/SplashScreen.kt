@@ -18,11 +18,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.lab2.R
+import com.example.lab2.auth.Auth
 import com.example.lab2.view.navigation.Route
 import kotlinx.coroutines.delay
 
 @Composable
-fun SplashScreenAnimate(navController: NavController) {
+fun SplashScreenAnimate(navController: NavController, auth: Auth) {
 
     val scale = remember {
         Animatable(0f)
@@ -39,7 +40,10 @@ fun SplashScreenAnimate(navController: NavController) {
             )
         )
         delay(2000L)
-        navController.navigate(Route.SignInScreen.route)
+        when (auth.currentUser) {
+            null -> navController.navigate(Route.SignInScreen.route)
+            else -> navController.navigate(Route.MainScreen.route)
+        }
     }
 
     Column(
@@ -48,13 +52,6 @@ fun SplashScreenAnimate(navController: NavController) {
         verticalArrangement = Arrangement.Center,
         modifier = Modifier.fillMaxSize()
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.lab2logotext),
-            contentDescription = "Splash Image",
-            modifier = Modifier
-                .size(300.dp)
-                .scale(scale.value)
-        )
         Image(
             painter = painterResource(id = R.drawable.lab2logotext),
             contentDescription = "Splash Image",
