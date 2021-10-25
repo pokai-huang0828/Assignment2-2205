@@ -172,29 +172,28 @@ fun SignUpScreen(
             color = Color.Red
         )
 
-//        val selected = remember { mutableStateOf(false) }
-//        val scale = animateFloatAsState(if (selected.value) 0.95f else 1f)
+        val selected = remember { mutableStateOf(false) }
+        val scale = animateFloatAsState(if (selected.value) 0.95f else 1f)
         Button(
-            onClick = { auth.signUpWithEmailAndPassword(navController, email, password) },
-
+            onClick = {  },
             modifier = Modifier
-//                .scale(scale.value)
+                .scale(scale.value)
                 .padding(top = 15.dp)
                 .fillMaxWidth(0.75f)
                 .shadow(elevation = 10.dp, shape = RoundedCornerShape(25.dp), clip = true)
                 .height(50.dp)
-//                .pointerInteropFilter {
-//
-//                    when (it.action) {
-//                        MotionEvent.ACTION_DOWN -> {
-//                            selected.value = true
-//                        }
-//                        MotionEvent.ACTION_UP -> {
-//                            selected.value = false
-//                        }
-//                    }
-//                    true
-//                }
+                .pointerInteropFilter {
+                    when (it.action) {
+                        MotionEvent.ACTION_DOWN -> {
+                            selected.value = true
+                            auth.signUpWithEmailAndPassword(navController, email, password)
+                        }
+                        MotionEvent.ACTION_UP -> {
+                            selected.value = false
+                        }
+                    }
+                    true
+                }
         ) {
             Text(
 
