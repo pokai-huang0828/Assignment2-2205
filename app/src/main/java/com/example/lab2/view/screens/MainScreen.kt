@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.lab2.auth.Auth
+import com.example.lab2.view.composables.MapBox
 
 @ExperimentalAnimationApi
 @Composable
@@ -35,7 +36,21 @@ fun MainScreen(navController: NavController, auth: Auth) {
             .fillMaxSize(),
         topBar = { TopBar(navController, auth = auth) }
     ) {
+        Box (
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        
+                ){
+            
+            MapBox(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .clip(RoundedCornerShape(24.dp))
+                ,
+            ){
 
+            }
+        }
     }
 }
 
