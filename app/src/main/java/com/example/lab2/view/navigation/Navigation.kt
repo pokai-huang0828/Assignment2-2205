@@ -14,7 +14,9 @@ import com.example.lab2.view.screens.MainScreen
 import com.example.lab2.view.screens.SignInScreen
 import com.example.lab2.view.screens.SignUpScreen
 import com.example.lab2.view.screens.SplashScreenAnimate
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
 
+@ExperimentalPermissionsApi
 @ExperimentalComposeUiApi
 @ExperimentalAnimationApi
 @Composable

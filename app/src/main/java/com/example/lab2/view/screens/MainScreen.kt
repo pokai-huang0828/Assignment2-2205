@@ -36,6 +36,7 @@ fun MainScreen(navController: NavController, auth: Auth) {
             .fillMaxSize(),
         topBar = { TopBar(navController, auth = auth) }
     ) {
+
         Box (
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center

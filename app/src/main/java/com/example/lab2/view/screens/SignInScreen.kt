@@ -36,8 +36,9 @@ import com.example.lab2.MainActivity
 import com.example.lab2.R
 import com.example.lab2.auth.Auth
 import com.example.lab2.view.navigation.Route
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
 
-
+@ExperimentalPermissionsApi
 @ExperimentalAnimationApi
 @ExperimentalComposeUiApi
 @Composable
@@ -146,14 +147,30 @@ fun SignInScreen(navController: NavController,
             )
         }
 
+
+        val selected1 = remember { mutableStateOf(false) }
+        val scale2 = animateFloatAsState(if (selected1.value) 0.95f else 1f)
         OutlinedButton(
             border = ButtonDefaults.outlinedBorder.copy(width = 1.dp),
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 55.dp)
-                .padding(top = 10.dp)
-                .height(50.dp),
-            onClick = { auth.signInWithGoogle(MainActivity.GOOGLE_AUTH) }
+                .scale(scale2.value)
+                .fillMaxWidth(0.75f)
+                .padding(top = 15.dp)
+                .height(50.dp)
+                .shadow(elevation = 10.dp, shape = RoundedCornerShape(25.dp), clip = true)
+                .pointerInteropFilter {
+                    when (it.action) {
+                        MotionEvent.ACTION_DOWN -> {
+                            selected1.value = true
+                            auth.signInWithGoogle(MainActivity.GOOGLE_AUTH)
+                        }
+                        MotionEvent.ACTION_UP -> {
+                            selected1.value = false
+                        }
+                    }
+                    true
+                },
+            onClick = {  }
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
