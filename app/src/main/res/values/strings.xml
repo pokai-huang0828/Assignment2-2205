@@ -6,6 +6,7 @@
     <string name="splash_screen">SplashScreen</string>
     <string name="sign_in_screen">SignInScreen</string>
     <string name="sign_up_screen">SignUpScreen</string>
+    <string name="profile_screen">ProfileScreen</string>
 
     //map key
     <string name="google_maps_key">AIzaSyAtRi1VdB2tUpcsY7hF2G2qjY-Ili8ZFcA</string>
