@@ -118,7 +118,6 @@ fun SignInScreen(navController: NavController,
         val scale = animateFloatAsState(if (selected.value) 0.95f else 1f)
         Button(
             onClick = {  },
-
             modifier = Modifier
                 .scale(scale.value)
                 .padding(top = 15.dp)

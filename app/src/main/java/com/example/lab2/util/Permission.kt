@@ -1,6 +1,8 @@
 package com.example.lab2.util
 
 import android.Manifest
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.Button
@@ -40,13 +42,37 @@ fun Permission(
     )
 }
 
+@RequiresApi(Build.VERSION_CODES.Q)
+@ExperimentalPermissionsApi
+@Composable
+fun PermissionForGallery(
+    permission: String = Manifest.permission.ACCESS_MEDIA_LOCATION,
+    rationale: String = "",
+    permissionNotAvailableContent: @Composable () -> Unit = { },
+    content: @Composable () -> Unit = { },
+){
+    val permissionState = rememberPermissionState(permission)
+
+    PermissionRequired(
+        permissionState = permissionState,
+        permissionNotGrantedContent = {
+            Rational(
+                text = rationale,
+                onRequestPermission = { permissionState.launchPermissionRequest() }
+            )
+        },
+        permissionNotAvailableContent = permissionNotAvailableContent,
+        content = content
+    )
+}
+
 @Composable
 private fun Rational(
     text: String,
     onRequestPermission: () -> Unit
 ) {
     AlertDialog(
-        onDismissRequest = { /* Don't */ },
+        onDismissRequest = {  },
         title = {
             Text(text = "Permission request")
         },
@@ -59,19 +85,4 @@ private fun Rational(
             }
         }
     )
-}
-
-
-@Composable
-private fun PermissionDenied(navigateToSettingsScreen: () -> Unit) {
-    Column {
-        Text(
-            "Permission denied. See this FAQ with information about why we " +
-                    "need this permission. Please, grant us access on the Settings screen."
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        Button(onClick = navigateToSettingsScreen) {
-            Text("Open Settings")
-        }
-    }
 }
